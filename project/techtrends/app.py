@@ -3,7 +3,7 @@ from sqlite3.dbapi2 import connect
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
-import logging
+import logging 
 
 # Function to get a database connection.
 # This function connects to database with the name `database.db`
