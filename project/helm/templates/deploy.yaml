@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: techtrends
+    tag: project
+  name: techtrends
+  namespace: {{ .Values.namespace.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: techtrends
+      tag: project
+  template:
+    metadata:
+      labels:
+        app: techtrends
+        tag: project
+    spec:
+      containers:
+      - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: {{ .Values.livenessProbe.path }}
+              port: {{ .Values.ports.containerPort }}
+              scheme: HTTP
+            initialDelaySeconds: 0
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+        name: techtrends
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.readinessProbe.memory }}
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+        ports:
+            - containerPort: {{ .Values.ports.containerPort }}
+              name: http
+              protocol: TCP
+        readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: {{ .Values.readinessProbe.path }}
+              port: {{ .Values.ports.containerPort }}
+              scheme: HTTP
+            initialDelaySeconds: 0
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+        

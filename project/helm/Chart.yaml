@@ -1,0 +1,10 @@
+apiVersion: v1
+name: techtrends 
+description: Install the Techtrends project application
+keywords:
+- techtrends
+- techtrends 
+version: 1.0.0
+maintainers:
+- name: abdulquadri
+  email: abdlquadri@googlemail.com
