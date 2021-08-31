@@ -1,3 +1,4 @@
+import sys
 import sqlite3
 from sqlite3.dbapi2 import connect
 
@@ -23,7 +24,16 @@ def get_post(post_id):
 # Define the Flask application
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
-logging.basicConfig(level=logging.DEBUG)
+
+# set logger to handle STDOUT and STDERR 
+stdout_handler =  logging.StreamHandler(sys.stdout)
+stderr_handler =  logging.StreamHandler(sys.stderr)
+handlers = [stderr_handler, stdout_handler]
+ # format output
+format_output = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
+logging.basicConfig(format=format_output, level=logging.DEBUG, handlers=handlers)
+
 
 # Define the main route of the web application 
 @app.route('/')
