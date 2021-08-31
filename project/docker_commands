@@ -5,7 +5,10 @@ sudo docker build -t techtrends -f ../Dockerfile ..
 sudo docker run -d -p 7111:3111 techtrends
 
 ## Docker commands used to get the application logs
-sudo docker logs 90af1840bd48
+sudo docker logs 90af1840bd48 
+
+## From my great reviewer. Thank you
+## docker logs -f $$(docker ps | grep <CONTAINER_NAME> | tr " " "\n" | tail -1)
 
 ## Logs from the container running the TechTrends application
  * Serving Flask app "app" (lazy loading)
